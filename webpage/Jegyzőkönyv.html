@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='http://fonts.googleapis.com/css?family=Oswald' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="css/Jegyzőkönyv.css">
+</head>
+<body>
+    <header>
+        <div class="text-3d" onclick="location.href='index.html'">A Ravasz, az Agy és két füstölgő puskacső, plusz egy fő </div>
+    </header>
+    <article>
+        <h1>Jegyzőkönyv</h1>
+        <p>Egy soproni megrendelő olyan kéréssel fordult hozzánk, hogy a most nyilt online bankjához egy banki alkalmazás appot  szeretne készíteni. Az lenne a célja, hogy az ügyfelek egyszerűen, online, sorban állás nélkül is el tudják rendezni banki ügyeiket és ezáltal csökkentve a banki dolgozok terheit is egyben.</p>  
+        <h2>A megrendelő elképzelései:</h2>
+        <h3>Alap elvárások:</h3>
+        <p><ul>
+            <li>Átláthatóság , stabilitás és gyorsaság.</li>
+            <li>Legyen egy biztonságos bejelentkezési felület.</li>
+            <li>Egyszerű regisztráció és felhasználóbarát kivitelezés.</li>
+            <li>Számlainfó és számlatörténet.</li>
+            <li>Pénzbe-,kifizetés és utalások kezelése.</li>
+            <li>Személyes adatok megjelenítése külön menüpontban.</li>
+            <li>Facilitálni a közszolgáltatási ügyfélorientált trendeket.</li>
+            <li>Teljes összhangban kell ösztönözni az ügyfélbarát stratégiai célokat.</li>
+        </ul></p>
+        <h2>Szoftveres követelmény:</h2>
+        <ul>
+            <li>Java fejlesztői környezet - csapatunk javaslatára az Apache Netbeans alkalmazását fogja csapatunk alkalmazni a fejlesztés során melybe a megrendelő is beleegyezett.</li>
+            <li>Felhasználói adatok biztonságos kezelése, és azok tárolása megfelelően privatizálva egy külső szerveren (melyet jelen esetben az ELTE biztosít).</li>
+            <li>A szoftver alacsony erőforrású legyen, hogy bármilyen eszközön könnyen futtathatóvá váljon ilyen eszköz például egy telefon vagy egy chromebook.</li>
+            <li>A termék használatához szükséges internetes kapcsolat, ezáltal a nap 24 órájában elérhető.</li>
+        </ul>
+        <h2>Programon belüli szerepkörök:</h2>
+        <ul>
+            <li><h3>Vendég:</h3></li>
+            <p>Az a felhasználó, aki azonosítatlanul használja az alkalmazást. A vendég felhasználó csak a publikus oldalakat és funkciókat érheti el. Ilyen például a regisztráció illetve a bejelentkezés, a.kapcsolatfelvételi fül megtekintése.</p>
+            <li><h3>Bejelentkezett, azonosított felhasználó:</h3></li>
+            <p>A bejelentkezett felhasználók a publikus oldalakon kívül a saját bankfiókjukhoz és a különféle banki funkciókhoz férhet hozzá, mint például az utalás, saját banki adatainak megtekintése, előző tranzakciók megtekintése.</p>
+            <li><h3>Banki adminisztrátor:</h3></li>
+            <p>A felhasználói adatokat látja, de nem képes módosítani azokat, illetve látja a végbement tranzakciók listáját az applikáción keresztül.</p>
+            <li><h3>Adminisztrátor:</h3></li>
+            <p>A felhasználói adatokat módosítani képes felhasználó, tranzakciók listájához ,és a bank teljes adatbázisához való hozzáférés.</p>
+        </ul>>
+        <h2>Megvalósíthatósági elemzés:</h2>
+        <ul>
+            <li>A megrendelő büdzséjéhez alkalmazkodva, 5 fejlesztő áll rendelkezésre és a fejlesztéshez szükséges eszközöket a megrendelő biztosítja a fejlesztése idejére, az-az fejenként egy számítógép és egy MySQL szerver az adatok tárolására.</li>
+            <li>A projekt megvalósításához alkalmazott szoftverek az Apache NetBeans és a MySQL lesz.</li>
+        </ul>
+        <h2>Megvalósítási költségek és rendelkezésre álló idő:</h2>
+        <p>A fentebb említett erőforrások árát (humán erőforrás, hardver a fejlesztőknek, szoftver licencek megvétele/bérlése) a megrendelő biztosítja. A szerződés szerint a megrendelő kérésére 6 hónap (+/- 1 hónap) áll rendelkezésre. </p>
+        <h2>Kinézet:</h2>
+        <ul>
+            <li><h3>Bejelentkezési felület:</h3></li>
+            <p>Tartalmazzon két mezőt amely a bejelentkezéshez szükséges adatokkal lehet majd kitölteni (felhasználónév, jelszó). Illetve egy banki logó elhelyezése. Letisztultság legyen az előtérben.</p>
+            <li><h3>Főmenü:</h3></li>
+            <p>Minden legyen elérhető innen egy kattintással, középen lévő könnyen látható menüpontokból, amelyekhez tartoznak ikonok. Láthatóak legyenek a felhasználó adatai is. Ide csak a fiók kiválasztása után lehessen eljütni.</p>
+        </ul>
+        <p>A megrendelő ezeket a fő pontokat kérte a kinézet kapcsán, a többi kialakítását a fejlesztő csapat és a megrendelő a fejlesztés során egyezteti.</p>
+        <h2>Feladatunk:</h2>
+        <p>Kiterjeszteni a funkció-specifikus optimalizálási koncepciót.</p>
+    </article>
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+</body>
+</html>
