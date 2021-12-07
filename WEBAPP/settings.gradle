@@ -1,0 +1,4 @@
+rootProject.name = 'BankApp'
+
+include 'bank-domain'
+include 'bank-application'

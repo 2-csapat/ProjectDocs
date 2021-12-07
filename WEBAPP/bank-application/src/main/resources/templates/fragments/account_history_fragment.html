@@ -1,0 +1,47 @@
+<main th:fragment="account_history">
+
+    <div class="row">
+        <div class="col--lg6 mb-4">
+            <h2>Account History</h2>
+            <form action="#" th:action="@{/filter}" method="post" th:object="${account}">
+                <select style="max-width: 50%" class="custom-select" id="transactions" th:field="*{accountNumber}">
+                    <option value="all" selected>All transactions</option>
+                    <option th:each="account : ${accounts}"
+                            th:value="${account.accountNumber}" th:text="${account.accountNumber}"></option>
+                </select>
+
+            </form>
+            <h2>Transactions</h2>
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                    <thead>
+                    <tr>
+                        <th scope="col">Type</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Comment</th>
+                        <th scope="col">Amount</th>
+                        <th scope="col">Account</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <div th:each="transaction : ${transactions}">
+                        <tr>
+                            <td th:text="${transaction.getType}"></td>
+                            <td th:text="${transaction.getDate}"></td>
+                            <td th:text="${transaction.getComment}"></td>
+                            <td th:text="${transaction.getAmount}"></td>
+                            <td th:text="${transaction.getTargetAccountNumber}"></td>
+                        </tr>
+                    </div>
+                    </tbody>
+                </table>
+        </div>
+
+
+        </div>
+
+
+
+
+    </div>
+</main>

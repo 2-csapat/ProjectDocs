@@ -1,0 +1,13 @@
+<div th:fragment="savings_accounts">
+    <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            Select Account
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+            <th:block th:each="acc: ${accountViews}">
+                <li><a class="dropdown-item" href="#" th:href="|/savings_account/${acc.getAccountNumber}"
+                       th:text="${acc.getName + ' | ' + acc.getAccountNumber + ' | ' + acc.getBalance + 'HUF'}">Action</a></li>
+            </th:block>
+        </ul>
+    </div>
+</div>

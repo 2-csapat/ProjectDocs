@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/MavenBank/MavenBank.iml" filepath="$PROJECT_DIR$/MavenBank/MavenBank.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/ProjectDocs.iml" filepath="$PROJECT_DIR$/.idea/ProjectDocs.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,9 @@
+
+<div th:fragment="transactions">
+
+        <button type="button" class="btn btn-outline-secondary transaction" th:each="transactionView : ${transactionViews}">
+            <div><span>Comment: </span><span th:text="${transactionView.getComment}"></span></div>
+            <div><span>Amount: </span><span th:text="${transactionView.getAmount}"></span></div>
+            <div><span>TargetedAccountNumber: </span><span th:text="${transactionView.getTargetAccountNumber}"></span></div>
+        </button>
+</div>

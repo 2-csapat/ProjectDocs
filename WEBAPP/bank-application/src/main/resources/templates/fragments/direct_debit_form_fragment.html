@@ -1,0 +1,19 @@
+<main th:fragment="direct_debit_form">
+    <div>
+        <h3>Create New Direct Debit Authorization:</h3>
+        <form action="#" th:action="@{/add_direct_debit}" method="post" th:object="${directDebitView}">
+            <div>
+                <label for="provider">Provider Name: </label>
+                <input type="text" id="provider" th:field="*{providerName}"/>
+            </div>
+            <div>
+                <label for="accountNum">Provider Account No.: </label>
+                <input type="text" id="accountNum" th:field="*{providerAccountNumber}"/>
+            </div>
+            <div>
+                <input type="submit" class="btn btn-outline-dark" value="SUBMIT">
+                <input type="reset" class="btn btn-outline-danger" value="RESET">
+            </div>
+        </form>
+    </div>
+</main>

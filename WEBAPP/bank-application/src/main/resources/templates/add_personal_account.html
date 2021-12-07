@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head th:include="fragments/header_fragment_base.html :: header">
+</head>
+
+<body class="bg-gradient-primary">
+
+<th:block th:include="fragments/header_fragment_main.html :: header_fragment">
+</th:block>
+
+<div class="container ">
+    <div class="card o-hidden border-0 shadow-lg my-5 w-50">
+        <div class="card-body p-0 ">
+            <!-- Nested Row within Card Body -->
+            <div>
+                <div>
+                    <div class="p-5">
+                        <div class="text-center">
+                            <h1 class="h4 text-gray-900 mb-4">Add a new Personal Account!</h1>
+                        </div>
+                        <form class="user" action="#" th:action="@{/add_account}" method="post" th:object="${account}">
+                            <div class="form-group row">
+                                <label for="name">Account name:</label>
+                                <input th:field="*{name}" type="text" class="form-control form-control-user"
+                                       id="name"
+                                       placeholder="Account Name">
+                            </div>
+                            <div class="form-group row">
+                                <label for="transfer-limit">Daily transfer limit:</label>
+                                <input th:field="*{dailyTransferLimit}" type="text" class="form-control form-control-user"
+                                       id="transfer-limit"
+                                       placeholder="Daily Transfer Limit">
+                            </div>
+                            <button type="submit" value="ADD" class="btn btn-primary btn-user btn-block">
+                                Add
+                            </button>
+                        </form>
+                        <hr>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<footer class="sticky-footer bg-white" th:insert="fragments/footer_fragment_base.html :: footer"></footer>
+
+</body>
+
+</html>
+
+
+</html>ű
+
+

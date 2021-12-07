@@ -1,0 +1,71 @@
+
+<th:block th:include="fragments/header_fragment_main.html :: header_fragment">
+</th:block>
+<div >
+
+
+
+
+    <form action="#" th:action="@{/do_transfer}" method="post" th:object="${transaction}">
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Template
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <th:block th:each="temp: ${transactionViews}">
+                    <li><a class="dropdown-item" href="#" th:href="|/transfer/${temp.getComment}"
+                           th:text="${temp.getComment}">Action</a></li>
+                </th:block>
+            </ul>
+        </div>
+
+        <div>
+            <label for="accountno">Account: </label>
+            <select style="max-width: 50%" class="custom-select" id="accountno" th:field="*{ownAccountNumber}">
+                <option th:each="personalAccount : ${personalAccounts}"
+                        th:value="${personalAccount.getAccountNumber}"
+                        th:text="${personalAccount.getAccountNumber}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="taccountno">Target account: </label>
+            <input type="text" id="taccountno" th:field="*{targetAccountNumber}"/>
+            <div th:if="${message!=null}" >
+                <div>
+                    <small class="text-danger" th:text="${message}"></small>
+                </div>
+            </div>
+        </div>
+        <div>
+            <label for="amount">Amount: </label>
+            <input type="text" id="amount" th:field="*{amount}"/>
+        </div>
+        <div>
+            <label for="comment">Comment: </label>
+            <input type="text" id="comment" th:field="*{comment}"/></br>
+        </div>
+        <div>
+            <label for="currentDate">Transfer time, timing:</label>
+
+            <input type="date" id="currentDate" name="transfer-start"
+                   placeholder="yyyy-mm-dd"
+                   min="1930-01-01" max="2100-12-31">
+        </div>
+        <div>
+            <input type="submit" class="btn btn-outline-dark" value="SUBMIT">
+            <button type="submit" class="btn btn-outline-dark" value="SAVE TRANSACTION"
+                    formaction="/save_transaction">
+                SAVE TRANSACTION
+            </button>
+            <input type="reset" class="btn btn-outline-danger" value="RESET">
+        </div>
+    </form>
+</div>
+</div>
+<th:block class="sticky-footer bg-white" th:insert="fragments/footer_fragment_main.html :: footer"></th:block>
+
+<script type="text/javascript">
+  let current_datetime = new Date();
+  let formatted_date = current_datetime.getFullYear() + "-" + (current_datetime.getMonth() + 1) + "-" + ((current_datetime.getDate()<10)?'0':'') + current_datetime.getDate()
+  document.getElementById("currentDate").value = formatted_date;
+</script>

@@ -1,0 +1,33 @@
+<main th:fragment="transaction_content">
+
+    </div>
+        <div class="row">
+            <div >
+                <h2>Last 10 transactions</h2>
+                <div class="table-responsive">
+                    <table class="table table-striped table-sm">
+                        <thead>
+                        <tr>
+                            <th scope="col">Type</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Comment</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Account</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <div th:each="transactionView : ${transactionViews}">
+                            <tr>
+                                <td th:text="${transactionView.getType}"></td>
+                                <td th:text="${transactionView.getDate}"></td>
+                                <td th:text="${transactionView.getComment}"></td>
+                                <td th:text="${transactionView.getAmount}"></td>
+                                <td th:text="${transactionView.getTargetAccountNumber}"></td>
+                            </tr>
+                        </div>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+</main>

@@ -1,0 +1,37 @@
+<th:block th:include="fragments/header_fragment_main.html :: header_fragment">
+</th:block>
+
+<div th:if="${message!=null}" >
+    <div>
+        <small class="text-success" th:text="${message}"></small>
+    </div>
+</div>
+<div th:insert="fragments/savings_accounts_list.html :: savings_accounts"></div>
+<a th:href="|/delete_savings_account/${selected_account.getAccountNumber}"><button class="btn btn-outline-danger">Delete</button></a>
+<a th:href="@{/add_savings_account}"><button class="btn  btn-outline-success">Add Account</button></a>
+
+<div>
+    Account name: <span th:text="${selected_account.getName}"></span><br>
+    Account number: <span th:text="${selected_account.getAccountNumber}"></span><br>
+    Balance: <span th:text="${selected_account.getBalance + 'HUF'}"></span><br>
+</div>
+
+<div class="d-sm-flex align-items-center justify-content-between mb-4"
+     th:insert="fragments/transaction_fragment.html:: transaction_content"></div>
+
+
+<th:block class="sticky-footer bg-white" th:insert="fragments/footer_fragment_main.html :: footer"></th:block>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
