@@ -1,0 +1,97 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap');
+
+#anchorPane, #root {
+    -fx-background-color: #110b2f;
+    -fx-font-family: 'Oswald', sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+
+    -fx-min-width: 400px;
+    -fx-min-height: 300px;
+}
+
+.text-field , .password-field, #PaneLabel {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-max-height: 48px;
+    -fx-max-width: 450px;
+    -fx-min-height: 32px;
+    -fx-min-width: 250px;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-max-height: 40px;
+    -fx-max-width: 200px;
+    -fx-min-height: 40px;
+    -fx-min-width: 200px;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 200px;
+    -fx-border-radius: 20px;
+}
+
+#startTransaction {
+    // wide button
+-fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-max-height: 40px;
+    -fx-max-width: 300px;
+    -fx-min-height: 40px;
+    -fx-min-width: 300px;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 300px;
+    -fx-border-radius: 20px;
+}
+
+.choice-box .menu-item:focused {
+    -fx-background-color: grey;
+}
+
+.choice-box .menu-item > .label {
+    -fx-text-fill: #110b2f;
+}
+
+.choice-box .menu-item:focused > .label {
+    -fx-text-fill: #110b2f;
+}
+
+#choiceBox {
+
+    -fx-background-color: #110b2f;
+
+    -fx-border-width: 1px;
+    -fx-border-color: grey;
+
+    -fx-max-height: 48px;
+    -fx-max-width: 450px;
+    -fx-min-height: 32px;
+    -fx-min-width: 250px;
+}
+
+#datePicker {
+    -fx-background-color: #110b2f;
+    -fx-border-width: 1px;
+    -fx-border-color: white;
+    -fx-border-radius: 5px;
+
+    -fx-max-height: 48px;
+    -fx-max-width: 450px;
+    -fx-min-height: 32px;
+    -fx-min-width: 250px;
+}
+
+#vbox {
+    -fx-border-color: white;
+    -fx-border-width: 2px;
+}
+
+
+.button:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #110b2f;
+}
+
+.label {
+    -fx-text-fill: white;
+}

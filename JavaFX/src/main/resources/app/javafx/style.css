@@ -1,0 +1,54 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@600&display=swap');
+
+
+#borderPane, #top, #loginPane {
+    -fx-background-color: #110b2f;
+    -fx-font-family: 'Oswald', sans-serif;
+    -fx-font-weight: bold;
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+
+}
+
+#gridLabel {
+    -fx-background-color: transparent;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 200px;
+    -fx-font-family: 'Oswald', sans-serif;
+    -fx-font-size: 24px;
+    -fx-text-fill: white;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 200px;
+    -fx-font-family: 'Oswald', sans-serif;
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+
+}
+
+#adminTransaction {
+    -fx-background-color: transparent;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 200px;
+    -fx-font-family: 'Oswald', sans-serif;
+    -fx-font-size: 16px;
+    -fx-text-fill: white;
+}
+
+#btnSignin, #btnReg {
+    -fx-background-color: transparent;
+    -fx-pref-height: 40px;
+    -fx-pref-width: 240px;
+    -fx-font-family: 'Oswald', sans-serif;
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+}
+
+#menu:hover, #deposit:hover, #withdraw:hover, #transaction:hover, #admin:hover, #adminTransaction:hover, #btnSignin:hover, #btnReg:hover, #adminExchangeRate:hover, #deleteAccount:hover {
+    -fx-background-color: white;
+    -fx-text-fill: #110b2f;
+}
+

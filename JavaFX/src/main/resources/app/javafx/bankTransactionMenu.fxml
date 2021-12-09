@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<fx:root prefHeight="320.0" prefWidth="500.0" stylesheets="@PageStyle.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.javafx.PaneBankTransactionController">
+    <padding>
+        <Insets bottom="5.0" right="5.0" top="5.0" />
+    </padding>
+   <children>
+      <ScrollPane prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="75.0">
+         <content>
+            <TableView fx:id="tableView" editable="false" prefHeight="700.0" prefWidth="476.0" />
+         </content>
+      </ScrollPane>
+      <Button fx:id="list" layoutX="224.0" layoutY="14.0" mnemonicParsing="false" onAction="#load" text="List all transactions" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="20.0" />
+   </children>
+</fx:root>

@@ -1,0 +1,15 @@
+#card {
+    -fx-background-color: linear-gradient(to right, #1A3364, #2B49B3);
+    -fx-background-radius: 10px;
+}
+
+#mainAnchor {
+    -fx-background-color: transparent;
+    -fx-border-radius: 10px;
+    -fx-border-width: 3px;
+    -fx-border-color: #110b2f;
+}
+
+.label {
+    -fx-text-fill: white;
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane fx:id="loginPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@style.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.javafx.LoginController">
+    <children>
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+              <TextField fx:id="loginName" maxWidth="400.0" minWidth="100.0" prefHeight="32.0" prefWidth="240.0" promptText="Felhasználónév">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="100.0" right="100.0" />
+               </VBox.margin>
+            </TextField>
+              <PasswordField fx:id="loginPassword" maxWidth="400.0" minWidth="100.0" prefHeight="32.0" prefWidth="240.0" promptText="Jelszó">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="100.0" right="100.0" />
+               </VBox.margin>
+            </PasswordField>
+              <Button fx:id="btnSignin" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="32.0" prefWidth="240.0" text="Bejelentkezés">
+               <VBox.margin>
+                  <Insets left="100.0" right="100.0" />
+               </VBox.margin>
+            </Button>
+              <Button fx:id="btnReg" mnemonicParsing="false" onMouseClicked="#handleButtonAction" prefHeight="32.0" prefWidth="240.0" text="Regisztráció">
+               <VBox.margin>
+                  <Insets left="100.0" right="100.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+    </children>
+</AnchorPane>

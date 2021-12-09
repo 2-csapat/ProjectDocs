@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root fx:id="mainAnchor" prefHeight="320.0" prefWidth="500.0" stylesheets="@menuPageStyle.css" type="AnchorPane" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.javafx.PaneMenuController">
+    <padding>
+        <Insets bottom="5.0" right="5.0" top="5.0" />
+    </padding>
+    <children>
+        <VBox alignment="CENTER" layoutX="221.0" layoutY="81.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox alignment="CENTER" prefHeight="40.0" prefWidth="591.0">
+                    <children>
+                        <Label text="Főoldal">
+                            <font>
+                                <Font name="Gill Sans MT" size="18.0" />
+                            </font>
+                            <HBox.margin>
+                                <Insets />
+                            </HBox.margin>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Separator maxHeight="31.0" orientation="VERTICAL" prefHeight="31.0">
+                            <padding>
+                                <Insets left="5.0" right="5.0" />
+                            </padding>
+                        </Separator>
+                        <Label text="Üdvözöljük az bankunknál.">
+                            <font>
+                                <Font name="Gill Sans MT" size="18.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                        <Separator maxHeight="31.0" orientation="VERTICAL" prefHeight="31.0">
+                            <padding>
+                                <Insets left="5.0" right="5.0" />
+                            </padding>
+                        </Separator>
+                        <Label fx:id="time">
+                            <font>
+                                <Font name="Gill Sans MT" size="18.0" />
+                            </font>
+                            <padding>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                            </padding>
+                        </Label>
+                    </children>
+                    <VBox.margin>
+                        <Insets bottom="10.0" left="5.0" right="5.0" top="5.0" />
+                    </VBox.margin>
+                </HBox>
+                <HBox alignment="TOP_CENTER" prefHeight="175.0" prefWidth="300.0">
+                    <children>
+                        <AnchorPane fx:id="card" prefHeight="125.0" prefWidth="300.0">
+                            <children>
+                                <Label text="VISA" textFill="WHITE" AnchorPane.leftAnchor="5.0" AnchorPane.topAnchor="5.0">
+                                    <font>
+                                        <Font name="Calibri Bold" size="20.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="cardmoney" layoutX="5.0" layoutY="78.0" textFill="WHITE" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="20.0">
+                                    <font>
+                                        <Font name="Calibri Bold" size="20.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="cardOwnerName" layoutX="14.0" layoutY="88.0" textFill="WHITE" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0">
+                                    <font>
+                                        <Font name="Calibri" size="16.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </Label>
+                                <Label fx:id="cardNumberLabel" layoutX="15.0" layoutY="88.0" text="ID" textFill="WHITE" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="20.0">
+                                    <font>
+                                        <Font name="Calibri Bold" size="20.0" />
+                                    </font>
+                                    <padding>
+                                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                                    </padding>
+                                </Label>
+                            </children>
+                        </AnchorPane>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
+</fx:root>
