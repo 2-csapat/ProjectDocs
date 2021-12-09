@@ -36,9 +36,9 @@ public class LoginController {
                     new MainApplication(event, customer);
                 } else {
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                    alert.setTitle("Information");
-                    alert.setHeaderText("Invalid username or password.");
-                    alert.setContentText("Make sure you enter the correct username and password");
+                    alert.setTitle("");
+                    alert.setHeaderText("Helytelen felhasználónév vagy jelszó!");
+                    alert.setContentText("Ellenőrizze, hogy helyes felhasználónevet vagy jelszót adott e meg!");
                     alert.showAndWait();
                 }
             } else if (event.getSource() == btnReg) {

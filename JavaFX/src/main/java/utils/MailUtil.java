@@ -10,8 +10,8 @@ import java.util.Properties;
 public class MailUtil {
 
     public void sendMail(String toEmail, String subject, String body) throws MessagingException, UnsupportedEncodingException {
-        final String fromEmail = "simon.dominik2017@gmail.com";
-        final String password = "Dominik1121";
+        final String fromEmail = "villaskulcs234@gmail.com";
+        final String password = "Vvillaskulcs234!";
 
         Properties properties = new Properties();
         properties.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host

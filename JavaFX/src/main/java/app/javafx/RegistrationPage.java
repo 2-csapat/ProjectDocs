@@ -20,7 +20,7 @@ public class RegistrationPage extends Application {
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader(RegistrationPage.class.getResource("registration.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 720, 540);
-        primaryStage.getIcons().add(new Image("C:\\Users\\Simon Dominik Martin\\Documents\\IJP\\JavaFX\\src\\main\\resources\\images\\registration.png"));
+        primaryStage.getIcons().add(new Image("https://github.com/2-csapat/ProjectDocs/blob/main/JavaFX/target/classes/images/registration.png"));
         primaryStage.setTitle("Regisztráció!");
         primaryStage.setScene(scene);
         primaryStage.show();

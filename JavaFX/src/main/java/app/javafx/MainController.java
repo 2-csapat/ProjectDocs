@@ -181,7 +181,7 @@ public class MainController {
     @FXML
     public void sendMail() {
         try {
-            /*
+            /**
             uses a private gmail account to send out emails to users email address'
          */
             Vector<String> mails;
@@ -203,7 +203,7 @@ public class MainController {
     Button adminExchangeRate;
     @FXML
     public void updateExchangeRates() {
-        /*
+        /**
             updates exchange rates through https://exchangeratesapi.io/
             it is free, it allows 250 request / month
             the API return a json text, transforming it into String[], then into a mysql table
@@ -261,9 +261,9 @@ public class MainController {
     void deleteAccount(MouseEvent mouseEvent) {
         try {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Confirmation Dialog with Custom Actions");
-            alert.setHeaderText("Look, a Confirmation Dialog with Custom Actions");
-            alert.setContentText("Choose your option.");
+            alert.setTitle("Számla törlése.");
+            alert.setHeaderText("Ön jelenleg számlájának törlésére készül.");
+            alert.setContentText("Válasszon az alábbiak közül:");
             ButtonType buttonYes = new ButtonType("Igen");
             ButtonType buttonNo = new ButtonType("Nem");
             ButtonType buttonCancel = new ButtonType("Mégse", ButtonBar.ButtonData.CANCEL_CLOSE);

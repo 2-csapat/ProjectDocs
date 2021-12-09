@@ -64,7 +64,7 @@ public class DataBaseServices {
                     assert connection != null;
                     connection.setAutoCommit(false);
                     generateSalt();
-                    // Felhasználó hozzáadása
+                    // add user
                     try (PreparedStatement addUser = connection.prepareStatement("Insert into Users(Username, FirstName, LastName, Password, Salt, Email, Phone_num, Birth_date) Values(?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS)) {
                         addUser.setString(1, customer.getUsername());
                         addUser.setString(2, customer.getFirstName());
@@ -82,7 +82,7 @@ public class DataBaseServices {
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
-                    // Fiók hozzáadása
+                    // add account
                     try (PreparedStatement addAccount = connection.prepareStatement("Insert into Accounts(Type, Balance) Values (?,?)", Statement.RETURN_GENERATED_KEYS)) {
                         addAccount.setString(1, accountType.toString());
                         addAccount.setDouble(2, 0);
@@ -94,7 +94,7 @@ public class DataBaseServices {
                     } catch (Exception exception) {
                         exception.printStackTrace();
                     }
-                    // Adatbázisbeli kapcsolat létrehozása
+                    // connect to database
                     if (userId > 0 && accountId > 0) {
                         try (PreparedStatement linkAccount = connection.prepareStatement("Insert into mappings(UsersID, AccountsID) Values (?,?)")) {
                             linkAccount.setInt(1, userId); // linkAcc -> linkAccount
@@ -107,7 +107,7 @@ public class DataBaseServices {
                     } else {
                         connection.rollback();
                     }
-                    // kapcsolat bontása
+                    // close connection
                     connection.close();
                 } catch (SQLException exception) {
                     exception.printStackTrace();
@@ -122,11 +122,11 @@ public class DataBaseServices {
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[20];
         random.nextBytes(bytes);
-        // dont change
+        // it works, do not touch it!
         return bytes.toString();
     }
 
-    // Megnézi hogy a van-e ilyen regisztrált felhasználó a bejelentkezéshez, ha nincs -1-et ad vissza
+    // checks whether registered user exists, if not, return -1
     public int login(String username, String password) {
         int id = -1;
         Connection connection = connect();
@@ -227,7 +227,7 @@ public class DataBaseServices {
         return -1;
     }
 
-    // Update (pénz be-ki)
+    // Update (money in/out)
     void updateAccBalance(int accountId, double balanceChange) {
         try {
             Connection connection = connect();
@@ -256,7 +256,7 @@ public class DataBaseServices {
         }
     }
 
-    // Update (pénz be-ki)
+    // Update (money in/out)
     double getAccBalance(int accountId) {
         try {
             Connection connection = connect();
@@ -301,7 +301,7 @@ public class DataBaseServices {
     }
 
     // other
-    // megnézi használt-e a felhasználó név
+    // checks whether username exists
     public boolean usedUsername(String username) {
         try {
             Connection connection = connect();
@@ -309,7 +309,7 @@ public class DataBaseServices {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Username FROM Users WHERE Username = ?");
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
-            // van e ilyen nevű felhasználó
+            // checks whether user exists
             if (resultSet.next()) {
                 resultSet.close();
                 connection.close();
@@ -323,7 +323,7 @@ public class DataBaseServices {
         return true;
     }
 
-    // megnézi használt-e az email cím
+    // checks whether email exists
     private boolean emailCheck(String email) {
         try {
             Connection connection = connect();
@@ -344,7 +344,7 @@ public class DataBaseServices {
         return true;
     }
 
-    // Megnézi hogy a jelenlegi felhasználó admin-e
+    // checks whether current user is admin or not
     private boolean isAdmin(int id) {
         try {
             Connection connection = connect();
@@ -417,13 +417,13 @@ public class DataBaseServices {
         try {
             if (transaction.getSender() != transaction.getReceiver()) {
                 Connection connection = connect();
-                // if the receiver is a valid number
+                // checks if the receiver is a valid number
                 assert connection != null;
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID FROM Users WHERE ID = ?");
                 preparedStatement.setInt(1, transaction.getReceiver());
                 ResultSet resultSet = preparedStatement.executeQuery();
                 if (resultSet.next()) {
-                    // check if the value is valid
+                    // checks if the value is valid
                     preparedStatement = connection.prepareStatement("SELECT Balance FROM Accounts WHERE ID = ?");
                     preparedStatement.setInt(1, transaction.getSender());
                     resultSet = preparedStatement.executeQuery();
@@ -472,7 +472,7 @@ public class DataBaseServices {
     // exchange rates to db
     public void updateExchangeRates(String data) {
         try {
-            /*
+            /**
                 the string has a fix start if the request is successful: {"success
                 the first country is AED - the preceding text is unnecessary
                 replacing brackets
