@@ -2,7 +2,7 @@ package utils;
 
 /**
  *
- * @author simon
+ * @author Simon Dominik Martin, Gazdag Áron, Boda Levente Miklós, Farkas Krisztián, Bazsó Benjámin
  */
 
 public abstract class Account {
