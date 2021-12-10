@@ -21,6 +21,8 @@ public class DataBaseServices {
 
     private static final DataBaseServices instance = new DataBaseServices();
 
+    private final Connection connection = connect();
+
     private DataBaseServices() {
     }
 
@@ -59,7 +61,6 @@ public class DataBaseServices {
                 int accountId = -1;
                 String salt = generateSalt();
                 SHA3_512 sha3_256 = new SHA3_512(password, salt);
-                Connection connection = connect();
                 try {
                     assert connection != null;
                     connection.setAutoCommit(false);
@@ -107,8 +108,6 @@ public class DataBaseServices {
                     } else {
                         connection.rollback();
                     }
-                    // close connection
-                    connection.close();
                 } catch (SQLException exception) {
                     exception.printStackTrace();
                 }
@@ -129,7 +128,6 @@ public class DataBaseServices {
     // checks whether registered user exists, if not, return -1
     public int login(String username, String password) {
         int id = -1;
-        Connection connection = connect();
         ResultSet resultSet = null;
         try {
             assert connection != null;
@@ -145,12 +143,6 @@ public class DataBaseServices {
         } catch (Exception exception) {
             exception.printStackTrace();
         } finally {
-            try {
-                assert connection != null;
-                connection.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
             try {
                 assert resultSet != null;
                 resultSet.close();
@@ -179,8 +171,6 @@ public class DataBaseServices {
     Customer getUser(int id) {
         Customer customer = null;
         try {
-            Connection connection = connect();
-            assert connection != null;
             try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT Username, FirstName, LastName, Email, Phone_num, Birth_date FROM Users WHERE ID = ?")) {
                 preparedStatement.setInt(1, id);
                 ResultSet result = preparedStatement.executeQuery();
@@ -202,7 +192,6 @@ public class DataBaseServices {
 
     int getAccountNumber(int id) {
         try {
-            Connection connection = connect();
             ResultSet resultSet = null;
             try {
                 assert connection != null;
@@ -218,7 +207,6 @@ public class DataBaseServices {
             } finally {
                 assert resultSet != null;
                 resultSet.close();
-                connection.close();
             }
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -230,8 +218,6 @@ public class DataBaseServices {
     // Update (money in/out)
     void updateAccBalance(int accountId, double balanceChange) {
         try {
-            Connection connection = connect();
-
             // getting current balance
             assert connection != null;
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Balance FROM Accounts WHERE ID = ?");
@@ -259,8 +245,6 @@ public class DataBaseServices {
     // Update (money in/out)
     double getAccBalance(int accountId) {
         try {
-            Connection connection = connect();
-
             // getting current balance
             assert connection != null;
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Balance FROM Accounts WHERE ID = ?");
@@ -277,7 +261,6 @@ public class DataBaseServices {
 
     // Delete
     void deleteAccount(int id) {
-        Connection connection = connect();
         assert connection != null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT AccountsID FROM mappings where UsersID = ?");
@@ -295,6 +278,7 @@ public class DataBaseServices {
             preparedStatement = connection.prepareStatement("DELETE FROM accounts where ID = ?");
             preparedStatement.setInt(1, accountID);
             preparedStatement.executeUpdate();
+            resultSet.close();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -304,7 +288,6 @@ public class DataBaseServices {
     // checks whether username exists
     public boolean usedUsername(String username) {
         try {
-            Connection connection = connect();
             assert connection != null;
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Username FROM Users WHERE Username = ?");
             preparedStatement.setString(1, username);
@@ -312,11 +295,9 @@ public class DataBaseServices {
             // checks whether user exists
             if (resultSet.next()) {
                 resultSet.close();
-                connection.close();
                 throw new MyExceptions.UsedUserName();
             }
             resultSet.close();
-            connection.close();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -326,18 +307,15 @@ public class DataBaseServices {
     // checks whether email exists
     private boolean emailCheck(String email) {
         try {
-            Connection connection = connect();
             assert connection != null;
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Email FROM Users WHERE Email = ?");
             preparedStatement.setString(1, email);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
                 resultSet.close();
-                connection.close();
                 throw new MyExceptions.UsedEmail();
             }
             resultSet.close();
-            connection.close();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -347,14 +325,12 @@ public class DataBaseServices {
     // checks whether current user is admin or not
     private boolean isAdmin(int id) {
         try {
-            Connection connection = connect();
             assert connection != null;
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID FROM Admins WHERE UsersID = ?");
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             boolean result = resultSet.next();
             resultSet.close();
-            connection.close();
             return result;
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -365,7 +341,6 @@ public class DataBaseServices {
     public ArrayList<Currency> getCurrencys() {
         ArrayList<Currency> currencys = new ArrayList<>();
         try {
-            Connection connection = connect();
             assert connection != null;
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT currency, value FROM exchangerates");
             ResultSet resultSet = preparedStatement.executeQuery();
@@ -381,14 +356,12 @@ public class DataBaseServices {
     public Vector<String> getEmails() {
         try {
             Vector<String> mails = new Vector<>();
-            Connection connection = connect();
             assert connection != null;
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Email FROM Users");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 mails.add(resultSet.getString(1));
             }
-            connection.close();
             return mails;
         } catch (Exception exception) {
             exception.printStackTrace();
@@ -399,14 +372,12 @@ public class DataBaseServices {
     public ObservableList getTransactions() {
         ArrayList<Transaction> transactionArrayList = new ArrayList<>();
         try {
-            Connection connection = connect();
             assert connection != null;
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT SenderID, Amount, Currency, ReceiverID FROM Transactions");
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 transactionArrayList.add(new Transaction(resultSet.getInt("SenderID"), resultSet.getDouble("Amount"), resultSet.getString("Currency"), resultSet.getInt("ReceiverID")));
             }
-            connection.close();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
@@ -416,7 +387,6 @@ public class DataBaseServices {
     public void processTransaction(Transaction transaction, Currency currency) {
         try {
             if (transaction.getSender() != transaction.getReceiver()) {
-                Connection connection = connect();
                 // checks if the receiver is a valid number
                 assert connection != null;
                 PreparedStatement preparedStatement = connection.prepareStatement("SELECT ID FROM Users WHERE ID = ?");
@@ -444,7 +414,6 @@ public class DataBaseServices {
                         updateAccBalance(transaction.getSender(), transaction.getAmount() * (1 / currency.getValue()) * -1);
                         updateAccBalance(transaction.getReceiver(), transaction.getAmount() * (1 / currency.getValue()) );
                     }
-                    connection.close();
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Sikeres tranzakció.");
                     alert.setHeaderText("Utalását sikeresen elindította.");
@@ -486,7 +455,6 @@ public class DataBaseServices {
             String[] temp = data.split(",");
             String[] dataSet;
             // connecting to database
-            Connection connection = connect();
             // checking if the database has table "ExchangeRates", if so delete everything from it
             assert connection != null;
             DatabaseMetaData md = connection.getMetaData();
@@ -503,7 +471,6 @@ public class DataBaseServices {
                 preparedStatement.setString(2, dataSet[1]);
                 preparedStatement.execute();
             }
-            connection.close();
         } catch (Exception exception) {
             exception.printStackTrace();
         }
