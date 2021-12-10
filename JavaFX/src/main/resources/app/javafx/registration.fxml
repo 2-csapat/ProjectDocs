@@ -9,44 +9,72 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.Tooltip?>
 <AnchorPane fx:id="anchorPane" minHeight="480.0" minWidth="640.0" prefHeight="540.0" prefWidth="720.0" stylesheets="@PageStyle.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.javafx.RegistrationController">
    <children>
       <VBox alignment="CENTER" layoutX="15.0" layoutY="15.0" AnchorPane.bottomAnchor="20.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
          <children>
             <TextField fx:id="username" alignment="CENTER" maxHeight="48.0" maxWidth="450.0" minHeight="32.0" minWidth="250.0" promptText="Adja meg felhasználónevét.">
+                <tooltip>
+                    <Tooltip text="Felhasználónév: minimum 4 karakter, maximum 20." />
+                </tooltip>
                <VBox.margin>
                     <Insets bottom="10.0" left="120.0" right="120.0" top="5.0" />
                </VBox.margin></TextField>
             <PasswordField fx:id="password" alignment="CENTER" maxHeight="48.0" maxWidth="450.0" minHeight="32.0" minWidth="250.0" promptText="Adja meg a jelszót.">
+                <tooltip>
+                    <Tooltip text="Jelszó: minimum 12 karakter, kis- és nagybetűt, speciális karaktert és számot is kell tartalmaznia." />
+                </tooltip>
                <VBox.margin>
                   <Insets bottom="10.0" top="5.0" />
                </VBox.margin></PasswordField>
             <PasswordField fx:id="password2" alignment="CENTER" maxHeight="48.0" maxWidth="450.0" minHeight="32.0" minWidth="250.0" promptText="Ismételje meg a jelszót">
-               <VBox.margin>
+                <tooltip>
+                    <Tooltip text="Jelszó: meg kell egyeznie az előzőleg megadott jelszóval." />
+                </tooltip>
+                <VBox.margin>
                   <Insets bottom="10.0" top="5.0" />
                </VBox.margin></PasswordField>
             <TextField fx:id="firstName" alignment="CENTER" maxHeight="48.0" maxWidth="450.0" minHeight="32.0" minWidth="250.0" promptText="Adja meg vezetéknevét.">
+                <tooltip>
+                    <Tooltip text="Vezetéknév." />
+                </tooltip>
                 <VBox.margin>
                     <Insets bottom="10.0" left="120.0" right="120.0" top="5.0" />
                 </VBox.margin></TextField>
             <TextField fx:id="lastName" alignment="CENTER" maxHeight="48.0" maxWidth="450.0" minHeight="32.0" minWidth="250.0" promptText="Adja meg keresztnevét.">
+                <tooltip>
+                    <Tooltip text="Keresztnév." />
+                </tooltip>
                 <VBox.margin>
                     <Insets bottom="10.0" left="120.0" right="120.0" top="5.0" />
                 </VBox.margin></TextField>
              <TextField fx:id="email" alignment="CENTER" maxHeight="48.0" maxWidth="450.0" minHeight="32.0" minWidth="250.0" promptText="Adja meg email címét.">
+                 <tooltip>
+                     <Tooltip text="Email cím." />
+                 </tooltip>
                  <VBox.margin>
                      <Insets bottom="10.0" left="120.0" right="120.0" top="5.0" />
                  </VBox.margin></TextField>
              <TextField fx:id="phoneNum" alignment="CENTER" maxHeight="48.0" maxWidth="450.0" minHeight="32.0" minWidth="250.0" promptText="Adja meg telefonszámát.">
+                 <tooltip>
+                     <Tooltip text="Telefonszámot a következő minta alapján adja meg: +36/xxxxxxxxx" />
+                 </tooltip>
                  <VBox.margin>
                      <Insets bottom="10.0" left="120.0" right="120.0" top="5.0" />
                  </VBox.margin></TextField>
             <DatePicker fx:id="datePicker" editable="false" maxWidth="300.0" minWidth="100.0" prefHeight="35.0" prefWidth="150.0" promptText="Adja meg születési dátumát.">
+                <tooltip>
+                    <Tooltip text="Válassza ki a születési dátumát." />
+                </tooltip>
                 <VBox.margin>
                     <Insets bottom="10.0" left="160.0" right="160.0" top="5.0" />
                 </VBox.margin>
             </DatePicker>
             <ChoiceBox fx:id="choiceBox" maxWidth="300.0" minWidth="100.0" nodeOrientation="LEFT_TO_RIGHT" onMouseEntered="#load" prefWidth="150.0">
+                <tooltip>
+                    <Tooltip text="Válassza ki a bankszámla típusát." />
+                </tooltip>
                 <VBox.margin>
                     <Insets bottom="10.0" left="160.0" right="160.0" top="5.0" />
                 </VBox.margin></ChoiceBox>
