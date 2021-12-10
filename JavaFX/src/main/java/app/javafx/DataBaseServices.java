@@ -3,12 +3,14 @@ package app.javafx;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import org.json.JSONObject;
 import utils.*;
 
 import java.io.InputStream;
 import java.security.SecureRandom;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -110,6 +112,9 @@ public class DataBaseServices {
                     }
                 } catch (SQLException exception) {
                     exception.printStackTrace();
+                } finally {
+                    assert connection != null;
+                    connection.setAutoCommit(true);
                 }
             }
         } catch (Exception exception) {
@@ -171,6 +176,7 @@ public class DataBaseServices {
     Customer getUser(int id) {
         Customer customer = null;
         try {
+            assert connection != null;
             try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT Username, FirstName, LastName, Email, Phone_num, Birth_date FROM Users WHERE ID = ?")) {
                 preparedStatement.setInt(1, id);
                 ResultSet result = preparedStatement.executeQuery();
@@ -216,7 +222,7 @@ public class DataBaseServices {
     }
 
     // Update (money in/out)
-    void updateAccBalance(int accountId, double balanceChange) {
+    void updateAccountBalance(int accountId, double balanceChange) {
         try {
             // getting current balance
             assert connection != null;
@@ -228,17 +234,27 @@ public class DataBaseServices {
             currentBalance = resultSet.getDouble("Balance");
 
             // updating balance
+            connection.setAutoCommit(false);
             if (currentBalance + balanceChange >= 0) {
                 preparedStatement = connection.prepareStatement("Update Accounts Set Balance = ? Where ID = ?");
                 preparedStatement.setDouble(1, currentBalance + balanceChange);
                 preparedStatement.setInt(2, accountId);
                 preparedStatement.executeUpdate();
+                connection.commit();
             } else {
+                connection.rollback();
                 throw new MyExceptions.InsufficientFunds();
             }
 
         } catch (Exception exception) {
             exception.printStackTrace();
+        } finally {
+            assert connection != null;
+            try {
+                connection.setAutoCommit(true);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -411,8 +427,8 @@ public class DataBaseServices {
                         preparedStatement.setInt(4, transaction.getReceiver());
                         preparedStatement.executeUpdate();
 
-                        updateAccBalance(transaction.getSender(), transaction.getAmount() * (1 / currency.getValue()) * -1);
-                        updateAccBalance(transaction.getReceiver(), transaction.getAmount() * (1 / currency.getValue()) );
+                        updateAccountBalance(transaction.getSender(), transaction.getAmount() * (1 / currency.getValue()) * -1);
+                        updateAccountBalance(transaction.getReceiver(), transaction.getAmount() * (1 / currency.getValue()) );
                     }
                     Alert alert = new Alert(Alert.AlertType.INFORMATION);
                     alert.setTitle("Sikeres tranzakció.");
@@ -438,22 +454,16 @@ public class DataBaseServices {
         }
     }
 
-    // exchange rates to db
+    /** updating exchange rates in database
+     *
+     * @param data incoming json object in string
+     */
     public void updateExchangeRates(String data) {
         try {
-            /**
-                the string has a fix start if the request is successful: {"success
-                the first country is AED - the preceding text is unnecessary
-                replacing brackets
-             */
-            int startIndex = data.indexOf("{\"success");
-            int endIndex = data.lastIndexOf("\"AED");
-            String replacement = "";
-            String toBeReplaced = data.substring(startIndex + 1, endIndex);
-            data = data.replace(toBeReplaced, replacement).replace("{", "").replace("}", "");
-            // splitting text by ',' -> one line: "AED":4.244
-            String[] temp = data.split(",");
-            String[] dataSet;
+
+            JSONObject jsonObject = new JSONObject(data);
+            JSONObject rates = jsonObject.getJSONObject("rates");
+
             // connecting to database
             // checking if the database has table "ExchangeRates", if so delete everything from it
             assert connection != null;
@@ -463,12 +473,13 @@ public class DataBaseServices {
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ExchangeRates");
                 preparedStatement.execute();
             }
-            // replacing "\"" with nothing ,splitting text by ":", and inserting data line by line
-            for (String string : temp) {
-                dataSet = string.replace("\"", "").split(":");
+
+            Iterator<String> keys = rates.keys();
+            while (keys.hasNext()) {
+                String currentDynamicKey = (String)keys.next();
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ExchangeRates VALUES (?, ?)");
-                preparedStatement.setString(1, dataSet[0]);
-                preparedStatement.setString(2, dataSet[1]);
+                preparedStatement.setString(1, currentDynamicKey);
+                preparedStatement.setDouble(2, rates.getDouble(currentDynamicKey));
                 preparedStatement.execute();
             }
         } catch (Exception exception) {

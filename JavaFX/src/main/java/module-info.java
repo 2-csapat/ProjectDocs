@@ -5,6 +5,7 @@ module app.javafx {
     requires mysql.connector.java;
     requires java.mail;
     requires java.desktop;
+    requires org.json;
 
     opens app.javafx to javafx.fxml;
     exports app.javafx;

@@ -10,17 +10,13 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import javax.mail.MessagingException;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -108,7 +104,7 @@ public class MainController {
             if (!amountDeposit.getText().isEmpty() && Double.parseDouble(amountDeposit.getText()) > 0 && currency.getValue()!=null) {
                 for (Currency c : currencys) {
                     if (c.getName() == this.currency.getValue()) {
-                        dataBaseServices.updateAccBalance(customer.getId(), Double.parseDouble(amountDeposit.getText()) * (1/c.getValue()));
+                        dataBaseServices.updateAccountBalance(customer.getId(), Double.parseDouble(amountDeposit.getText()) * (1/c.getValue()));
                         break;
                     }
                 }
@@ -142,7 +138,7 @@ public class MainController {
             if (!amountWithdraw.getText().isEmpty() && Double.parseDouble(amountWithdraw.getText()) > 0 && currency.getValue() != null) {
                 for (Currency c : currencys) {
                     if (c.getName() == this.currency.getValue()) {
-                        dataBaseServices.updateAccBalance(customer.getId(), Double.parseDouble(amountWithdraw.getText()) * (1 / c.getValue()) * -1);
+                        dataBaseServices.updateAccountBalance(customer.getId(), Double.parseDouble(amountWithdraw.getText()) * (1 / c.getValue()) * -1);
                         break;
                     }
                 }
