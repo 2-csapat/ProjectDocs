@@ -21,7 +21,7 @@ public class LoginController {
     PasswordField loginPassword;
 
     @FXML
-    protected void handleButtonAction(MouseEvent event) {
+    protected void handleButtonAction(MouseEvent event) throws Exception {
         try {
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();
@@ -29,7 +29,7 @@ public class LoginController {
             if (event.getSource() == btnSignin) {
                 // get database
                 DataBaseServices dbServices = DataBaseServices.getInstance();
-                if (dbServices.login(loginName.getText(), loginPassword.getText()) != -1) {
+                if (dbServices.login(loginName.getText(), loginPassword.getText()) != null) {
                     //login successful
                     Customer customer = dbServices.getUser(dbServices.login(loginName.getText(), loginPassword.getText()));
                     stage.close();
@@ -46,7 +46,11 @@ public class LoginController {
                 new RegistrationPage(event);
             }
         } catch (Exception exception) {
-            exception.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("");
+            alert.setHeaderText("Csatlakozás sikertelen");
+            alert.setContentText("Kérjük ellenőrizze hogy rendelkezik-e internet kapcsolattal!");
+            alert.showAndWait();
         }
     }
 }

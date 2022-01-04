@@ -1,7 +1,7 @@
 package utils;
 
 public class Customer {
-    private final int id;
+    private final String id;
     private final String username;
     private final String firstname;
     private final String lastname;
@@ -10,7 +10,7 @@ public class Customer {
     private final String birthDate;
     private final boolean admin;
 
-    public Customer(int id, String username, String firstName, String lastName, String email, String phoneNum, String birthDate, boolean admin) {
+    public Customer(String id, String username, String firstName, String lastName, String email, String phoneNum, String birthDate, boolean admin) {
         this.id = id;
         this.username = username;
         this.firstname = firstName;
@@ -21,7 +21,7 @@ public class Customer {
         this.admin = admin;
     }
 
-    public int getId()
+    public String getId()
     {
         return id;
     }

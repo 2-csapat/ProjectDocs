@@ -20,6 +20,7 @@ import java.net.URL;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Vector;
 
@@ -59,7 +60,7 @@ public class MainController {
         // depending on mouse event, sets a pane to the borderpanes center
 
         if (mouseEvent.getSource() == menu) {
-            PaneMenu paneMenu = new PaneMenu(customer.getFirstName(), customer.getLastName(), dataBaseServices.getAccBalance(customer.getId()), dataBaseServices.getAccountNumber(customer.getId()));
+            PaneMenu paneMenu = new PaneMenu(customer.getFirstName(), customer.getLastName(), dataBaseServices.getAccountBalance(dataBaseServices.getAccountNumber(customer.getId())), dataBaseServices.getAccountNumber(customer.getId()));
             borderPane.setCenter(paneMenu);
         } else if (mouseEvent.getSource() == deposit) {
             PaneDeposit paneDeposit = new PaneDeposit(customer);
@@ -93,18 +94,18 @@ public class MainController {
     @FXML
     TextField amountDeposit;
     @FXML
-    ComboBox currency;
+    ComboBox<String> currency;
 
+    /**
+     calls deposit if the requirements are met
+     the deposit (textfield) amount is not empty, and it's a number (parseable to double)
+     */
     public void deposit() {
-        /**
-            calls deposit if the requirements are met
-            the deposit (textfield) amount is not empty, and it's a number (parseable to double)
-         */
         try {
             if (!amountDeposit.getText().isEmpty() && Double.parseDouble(amountDeposit.getText()) > 0 && currency.getValue()!=null) {
                 for (Currency c : currencys) {
-                    if (c.getName() == this.currency.getValue()) {
-                        dataBaseServices.updateAccountBalance(customer.getId(), Double.parseDouble(amountDeposit.getText()) * (1/c.getValue()));
+                    if (Objects.equals(c.getName(), this.currency.getValue())) {
+                        dataBaseServices.updateAccBalance(dataBaseServices.getAccountNumber(customer.getId()), Double.parseDouble(amountDeposit.getText()) * (1/c.getValue()));
                         break;
                     }
                 }
@@ -119,6 +120,13 @@ public class MainController {
                 throw new MyExceptions.InsufficientFunds();
             }
         } catch (Exception exception) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("");
+            alert.setHeaderText("Sikertelen befizetés!");
+            alert.setContentText("Kérjük győződjön meg róla, hogy a befizetés adatai valósak.");
+            alert.showAndWait();
+            amountDeposit.setText("");
+            currency.setValue(null);
             exception.printStackTrace();
         }
 
@@ -128,17 +136,16 @@ public class MainController {
     Button buttonWithdraw;
     @FXML
     TextField amountWithdraw;
-
+    /**
+     calls withdraw if the requirements are met
+     the withdraw (textfield) amount is not empty, and it's a number (parseable to double)
+     */
     public void withdraw() {
-        /**
-            calls withdraw if the requirements are met
-            the withdraw (textfield) amount is not empty, and it's a number (parseable to double)
-         */
         try {
             if (!amountWithdraw.getText().isEmpty() && Double.parseDouble(amountWithdraw.getText()) > 0 && currency.getValue() != null) {
                 for (Currency c : currencys) {
-                    if (c.getName() == this.currency.getValue()) {
-                        dataBaseServices.updateAccountBalance(customer.getId(), Double.parseDouble(amountWithdraw.getText()) * (1 / c.getValue()) * -1);
+                    if (Objects.equals(c.getName(), this.currency.getValue())) {
+                        dataBaseServices.updateAccBalance(dataBaseServices.getAccountNumber(customer.getId()), Double.parseDouble(amountWithdraw.getText()) * (1 / c.getValue()) * -1);
                         break;
                     }
                 }
@@ -153,6 +160,13 @@ public class MainController {
                 throw new MyExceptions.InsufficientFunds();
             }
         } catch (Exception exception) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("");
+            alert.setHeaderText("Sikertelen befizetés!");
+            alert.setContentText("Kérjük győződjön meg róla, hogy a befizetés adatai valósak.");
+            alert.showAndWait();
+            amountDeposit.setText("");
+            currency.setValue(null);
             exception.printStackTrace();
         }
     }
@@ -174,12 +188,13 @@ public class MainController {
     @FXML
     TextArea mailText;
 
+    /**
+     uses a private gmail account to send out emails to users email address'
+     */
     @FXML
     public void sendMail() {
         try {
-            /**
-            uses a private gmail account to send out emails to users email address'
-         */
+
             Vector<String> mails;
             // getting email addresses into a list or array
             mails = dataBaseServices.getEmails();
@@ -197,13 +212,14 @@ public class MainController {
 
     @FXML
     Button adminExchangeRate;
+    /**
+     updates exchange rates through https://exchangeratesapi.io/
+     it is free, it allows 250 request / month
+     the API return a json text, transforming it into String[], then into a mysql table
+     */
     @FXML
     public void updateExchangeRates() {
-        /**
-            updates exchange rates through https://exchangeratesapi.io/
-            it is free, it allows 250 request / month
-            the API return a json text, transforming it into String[], then into a mysql table
-         */
+
         HttpURLConnection connection = null;
         try {
             // using stringbuilder to build data string
@@ -265,7 +281,7 @@ public class MainController {
             ButtonType buttonCancel = new ButtonType("Mégse", ButtonBar.ButtonData.CANCEL_CLOSE);
             alert.getButtonTypes().setAll(buttonYes, buttonNo, buttonCancel);
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == buttonYes) {
+            if (result.isPresent() && result.get() == buttonYes) {
                 dataBaseServices.deleteAccount(customer.getId());
                 Node node = (Node) mouseEvent.getSource();
                 Stage stage = (Stage) node.getScene().getWindow();

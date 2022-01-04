@@ -1,31 +1,30 @@
 package utils;
 
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 
 public class Transaction {
-    private final SimpleIntegerProperty Sender;
+    private final SimpleStringProperty Sender;
     private final SimpleDoubleProperty Amount;
     private final SimpleStringProperty Currency;
-    private final SimpleIntegerProperty Receiver;
+    private final SimpleStringProperty Receiver;
 
-    public Transaction(int sender, double amount, String currency, int receiver) {
-        this.Sender = new SimpleIntegerProperty(sender);
+    public Transaction(String senderAccountID, double amount, String currency, String receiverAccountID) {
+        this.Sender = new SimpleStringProperty(senderAccountID);
         this.Amount = new SimpleDoubleProperty(amount);
         this.Currency = new SimpleStringProperty(currency);
-        this.Receiver = new SimpleIntegerProperty(receiver);
+        this.Receiver = new SimpleStringProperty(receiverAccountID);
     }
 
-    public int getSender() {
+    public String getSender() {
         return Sender.get();
     }
 
-    public SimpleIntegerProperty senderProperty() {
+    public SimpleStringProperty senderProperty() {
         return Sender;
     }
 
-    public void setSender(int sender) {
+    public void setSender(String sender) {
         this.Sender.set(sender);
     }
 
@@ -53,15 +52,15 @@ public class Transaction {
         this.Amount.set(amount);
     }
 
-    public int getReceiver() {
+    public String getReceiver() {
         return Receiver.get();
     }
 
-    public SimpleIntegerProperty receiverProperty() {
+    public SimpleStringProperty receiverProperty() {
         return Receiver;
     }
 
-    public void setReceiver(int receiver) {
+    public void setReceiver(String receiver) {
         this.Receiver.set(receiver);
     }
 

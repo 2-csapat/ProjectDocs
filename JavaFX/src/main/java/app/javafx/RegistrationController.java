@@ -168,7 +168,7 @@ public class RegistrationController {
     @FXML
     DatePicker datePicker;
     @FXML
-    ChoiceBox choiceBox;
+    ChoiceBox<String> choiceBox;
     @FXML
     Button buttonRegistration;
     @FXML
@@ -186,7 +186,7 @@ public class RegistrationController {
     public void registration(MouseEvent event) {
         try {
             if (event.getSource() == buttonRegistration) {
-                Customer customer = new Customer(-1, username.getText(), firstName.getText(), lastName.getText(), email.getText(), phoneNum.getText(), datePicker.getValue().toString(), false);
+                Customer customer = new Customer(null, username.getText(), firstName.getText(), lastName.getText(), email.getText(), phoneNum.getText(), datePicker.getValue().toString(), false);
                 // if tests passed
                 if (userNameCheck(customer.getUsername()) && pwCheck(password.getText(), password2.getText()) && dateCheck(datePicker.getValue())
                         && emailCheck(customer.getEmail()) && phoneNumCheck(customer.getPhoneNum()) && nameCheck(customer.getFirstName(), customer.getLastName())

@@ -22,7 +22,7 @@ public class PaneBankTransactionController {
     public void load() {
         tableView.getColumns().removeAll("Sender", "Amount", "Currency", "Receiver");
         DataBaseServices dbServices = DataBaseServices.getInstance();
-        ObservableList data = dbServices.getTransactions();
+        ObservableList<Transaction> data = dbServices.getTransactions();
         TableColumn<Transaction, Integer> sender = new TableColumn<>("Sender");
         TableColumn<Transaction, Double> amount = new TableColumn<>("Amount");
         TableColumn<Transaction, String> currency = new TableColumn<>("Currency");

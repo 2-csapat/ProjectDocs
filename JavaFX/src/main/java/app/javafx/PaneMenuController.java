@@ -4,19 +4,25 @@ import javafx.animation.Animation;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.util.Duration;
 
+import java.awt.*;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import org.controlsfx.control.Notifications;
+
 public class PaneMenuController {
 
     private String name;
     private double balance;
-    private int cardNumber;
+    private String cardNumber;
 
     @FXML
     Label cardOwnerName;
@@ -48,11 +54,11 @@ public class PaneMenuController {
 
     }
 
-    public int getCardNumber() {
+    public String getCardNumber() {
         return cardNumber;
     }
 
-    public void setCardNumber(int cardNumber) {
+    public void setCardNumber(String cardNumber) {
         this.cardNumber = cardNumber;
         cardNumberLabel.setText("Card number: " + this.cardNumber);
     }
@@ -72,6 +78,24 @@ public class PaneMenuController {
         }), new KeyFrame(Duration.seconds(5)));
         clock.setCycleCount(Animation.INDEFINITE);
         clock.play();
+    }
+
+    @FXML
+    void copyCardNum() {
+        StringSelection selection = new StringSelection(cardNumber);
+        Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
+        clipboard.setContents(selection, selection);
+
+        String title = "Notification";
+        String message = "Cardnumber successfully copied to clipboard";
+
+        Notifications notification = Notifications.create()
+                .title(title)
+                .text(message)
+                .hideAfter(Duration.seconds(5))
+                .position(Pos.BOTTOM_RIGHT);
+        notification.darkStyle();
+        notification.showInformation();
     }
 
 }

@@ -71,7 +71,7 @@ public class PaneTransactionController {
         try {
             for (Currency c : currencys) {
                 if (c.getName() == currency.getValue()) {
-                    Transaction transaction = new Transaction(customer.getId(), Double.parseDouble(amount.getText()), (String) currency.getValue(), Integer.parseInt(receiver.getText()));
+                    Transaction transaction = new Transaction(dataBaseServices.getAccountNumber(customer.getId()), Double.parseDouble(amount.getText()), (String) currency.getValue(), receiver.getText());
                     DataBaseServices dataBaseServices = DataBaseServices.getInstance();
                     dataBaseServices.processTransaction(transaction, c);
                     break;

@@ -22,7 +22,7 @@ public class LoginPage extends Application {
     public void start(Stage stage) throws IOException, ClassNotFoundException {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
-        stage.getIcons().add(new Image("C:\\Users\\bazso\\3D Objects\\projektek\\soos\\ProjectDocs\\JavaFX\\target\\classes\\images\\login.png"));
+        stage.getIcons().add(new Image("https://raw.githubusercontent.com/2-csapat/ProjectDocs/main/JavaFX/src/main/resources/images/login.png"));
         stage.setTitle("Bejelentkezés");
         stage.setScene(scene);
         stage.show();
