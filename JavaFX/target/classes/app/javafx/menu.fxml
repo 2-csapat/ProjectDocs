@@ -87,9 +87,9 @@
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                     </padding>
                                 </Label>
-                                <Label fx:id="cardNumberLabel" layoutX="15.0" layoutY="88.0" text="ID" textFill="WHITE" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="20.0">
+                                <Label fx:id="cardNumberLabel" layoutX="15.0" layoutY="88.0" text="ID" textFill="WHITE" onMouseClicked="#copyCardNum" AnchorPane.bottomAnchor="90.0" AnchorPane.leftAnchor="20.0">
                                     <font>
-                                        <Font name="Calibri Bold" size="20.0" />
+                                        <Font name="Calibri Bold" size="14.0" />
                                     </font>
                                     <padding>
                                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

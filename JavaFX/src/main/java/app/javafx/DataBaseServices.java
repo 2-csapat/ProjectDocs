@@ -3,6 +3,7 @@ package app.javafx;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.Alert;
+import org.json.JSONObject;
 import utils.Currency;
 import utils.*;
 
@@ -216,7 +217,7 @@ public class DataBaseServices {
             ResultSet resultSet = null;
             try {
                 assert connection != null;
-                try (PreparedStatement preparedStatement = connection.prepareStatement("select Accounts.ID from accounts join mappings m on accounts.ID = m.AccountsID where UsersID = ?")) {
+                try (PreparedStatement preparedStatement = connection.prepareStatement("SELECT Accounts.ID FROM accounts JOIN mappings m ON accounts.ID = m.AccountsID WHERE UsersID = ?")) {
                     preparedStatement.setString(1, id);
                     resultSet = preparedStatement.executeQuery();
                     if (resultSet.next()) {
@@ -479,38 +480,31 @@ public class DataBaseServices {
         }
     }
 
-    // exchange rates to db
+    /** updating exchange rates in database
+     *
+     * @param data incoming json object in string
+     */
     public void updateExchangeRates(String data) {
         try {
-            /*
-                the string has a fix start if the request is successful: {"success
-                the first country is AED - the preceding text is unnecessary
-                replacing brackets
-             */
-            int startIndex = data.indexOf("{\"success");
-            int endIndex = data.lastIndexOf("\"AED");
-            String replacement = "";
-            String toBeReplaced = data.substring(startIndex + 1, endIndex);
-            data = data.replace(toBeReplaced, replacement).replace("{", "").replace("}", "");
-            // splitting text by ',' -> one line: "AED":4.244
-            String[] temp = data.split(",");
-            String[] dataSet;
+            JSONObject jsonObject = new JSONObject(data);
+            JSONObject rates = jsonObject.getJSONObject("rates");
             // connecting to database
             Connection connection = connect();
             // checking if the database has table "ExchangeRates", if so delete everything from it
             assert connection != null;
             DatabaseMetaData md = connection.getMetaData();
-            ResultSet rs = md.getTables(null, null, "ExchangeRates" , null);
+            ResultSet rs = md.getTables(null, null, "ExchangeRates", null);
             if (rs.next()) {
                 PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM ExchangeRates");
                 preparedStatement.execute();
             }
-            // replacing "\"" with nothing ,splitting text by ":", and inserting data line by line
-            for (String string : temp) {
-                dataSet = string.replace("\"", "").split(":");
+
+            Iterator<String> keys = rates.keys();
+            while (keys.hasNext()) {
+                String currentDynamicKey = keys.next();
                 PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO ExchangeRates VALUES (?, ?)");
-                preparedStatement.setString(1, dataSet[0]);
-                preparedStatement.setString(2, dataSet[1]);
+                preparedStatement.setString(1, currentDynamicKey);
+                preparedStatement.setDouble(2, rates.getDouble(currentDynamicKey));
                 preparedStatement.execute();
             }
             connection.close();
