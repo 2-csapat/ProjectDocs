@@ -20,8 +20,12 @@ public class LoginController {
     @FXML
     PasswordField loginPassword;
 
+    /**
+     * starts the login progress
+     * @param event used to declare where the user clicked
+     */
     @FXML
-    protected void handleButtonAction(MouseEvent event) throws Exception {
+    protected void handleButtonAction(MouseEvent event) {
         try {
             Node node = (Node) event.getSource();
             Stage stage = (Stage) node.getScene().getWindow();

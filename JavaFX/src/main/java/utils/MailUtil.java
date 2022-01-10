@@ -8,7 +8,12 @@ import java.util.Date;
 import java.util.Properties;
 
 public class MailUtil {
-
+    /**
+     *
+     * @param toEmail the email address to send
+     * @param subject the subject of the email
+     * @param body    the text of the email
+     */
     public void sendMail(String toEmail, String subject, String body) throws MessagingException, UnsupportedEncodingException {
         final String fromEmail = "villaskulcs234@gmail.com";
         final String password = "Vvillaskulcs234!";

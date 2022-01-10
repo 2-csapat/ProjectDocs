@@ -24,10 +24,16 @@ public class DataBaseServices {
     private DataBaseServices() {
     }
 
+    /**
+     *  returns the singleton instance of the class
+     */
     public static DataBaseServices getInstance() {
         return instance;
     }
 
+    /**
+     *  connects to database using the dbconfig.properties to fetch information
+     */
     private Connection connect() {
         try {
             Properties properties = new Properties();
@@ -51,7 +57,12 @@ public class DataBaseServices {
         return null;
     }
 
-
+    /**
+     * completes a registration if it met the parameters
+     * @param customer  an instance of Customer
+     * @param password  the users password
+     * @param accountType the type of the current account
+     */
     void register(Customer customer, String password, AccountType accountType) {
         try {
             if (usedUsername(customer.getUsername()) && emailCheck(customer.getEmail())) {
@@ -129,6 +140,10 @@ public class DataBaseServices {
         }
     }
 
+    /**
+     * generates Salt for database
+     * @return String of bytes
+     */
     private String generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] bytes = new byte[20];
@@ -137,7 +152,12 @@ public class DataBaseServices {
         return bytes.toString();
     }
 
-    // Megnézi hogy a van-e ilyen regisztrált felhasználó a bejelentkezéshez, ha nincs -1-et ad vissza
+    /**
+     *
+     * @param username  given username
+     * @param password  given password
+     * @return null if login was not successful, else returns the registered id
+     */
     public String login(String username, String password) {
         Connection connection = connect();
         ResultSet resultSet = null;
@@ -172,6 +192,12 @@ public class DataBaseServices {
         return null;
     }
 
+    /**
+     *
+     * @param username      the name of the user
+     * @param connection    Connection to database
+     * @return the users Salt
+     */
     private String getSalt(String username, Connection connection) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT Salt FROM Users WHERE Username = ?");
@@ -186,7 +212,11 @@ public class DataBaseServices {
         return "";
     }
 
-    // Read
+    /**
+     *
+     * @param id    the id to look for in the database
+     * @return      the Current customer (type Customer)
+     */
     Customer getUser(String id) {
         Customer customer = null;
         try {
@@ -211,6 +241,11 @@ public class DataBaseServices {
         return customer;
     }
 
+    /**
+     *
+     * @param id    the id to look for in the database
+     * @return      returns AccountNumber(UUID) as a String
+     */
     String getAccountNumber(String id) {
         try {
             Connection connection = connect();
@@ -238,7 +273,11 @@ public class DataBaseServices {
         return null;
     }
 
-    // Update (pénz be-ki)
+    /**
+     *
+     * @param accountId     the Account that need to be changed
+     * @param balanceChange the amount of the change
+     */
     void updateAccBalance(String accountId, double balanceChange) {
         try {
             Connection connection = connect();
@@ -267,7 +306,11 @@ public class DataBaseServices {
         }
     }
 
-    // Update (pénz be-ki)
+    /**
+     *
+     * @param accountId the accountID to look for in the database
+     * @return returns the balance
+     */
     double getAccountBalance(String accountId) {
         try {
             Connection connection = connect();
@@ -285,8 +328,10 @@ public class DataBaseServices {
         return -1;
     }
 
-
-    // Delete
+    /**
+     *
+     * @param id the id that need to be deleted from database
+     */
     void deleteAccount(String id) {
         Connection connection = connect();
         assert connection != null;
@@ -310,7 +355,6 @@ public class DataBaseServices {
         }
     }
 
-    // other
     // megnézi használt-e a felhasználó név
     public boolean usedUsername(String username) {
         try {
@@ -355,7 +399,11 @@ public class DataBaseServices {
         return true;
     }
 
-    // Megnézi hogy a jelenlegi felhasználó admin-e
+    /**
+     *
+     * @param id the id that need to be checked
+     * @return returns true if the user is an admin
+     */
     private boolean isAdmin(String id) {
         try {
             Connection connection = connect();
@@ -373,6 +421,10 @@ public class DataBaseServices {
         return false;
     }
 
+    /**
+     *
+     * @return returns currencys as an arraylist
+     */
     public ArrayList<Currency> getCurrencys() {
         ArrayList<Currency> currencys = new ArrayList<>();
         try {
@@ -424,6 +476,11 @@ public class DataBaseServices {
         return FXCollections.observableArrayList(transactionArrayList);
     }
 
+    /**
+     *
+     * @param transaction the transaction that needs to be processed
+     * @param currency the currency of that transaction
+     */
     public void processTransaction(Transaction transaction, Currency currency) {
         try {
             if (!Objects.equals(transaction.getSender(), transaction.getReceiver())) {

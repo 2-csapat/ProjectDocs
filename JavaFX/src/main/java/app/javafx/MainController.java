@@ -55,6 +55,11 @@ public class MainController {
     @FXML
     BorderPane borderPane;
 
+    /**
+     *
+     * @param mouseEvent mainly used to declare where the user clicked
+     * @throws IOException
+     */
     @FXML
     public void loadPane(MouseEvent mouseEvent) throws IOException {
         // depending on mouse event, sets a pane to the borderpanes center
@@ -189,7 +194,7 @@ public class MainController {
     TextArea mailText;
 
     /**
-     uses a private gmail account to send out emails to users email address'
+     uses a gmail account, made for this purpose to send out emails to users email address'
      */
     @FXML
     public void sendMail() {
@@ -214,8 +219,7 @@ public class MainController {
     Button adminExchangeRate;
     /**
      updates exchange rates through https://exchangeratesapi.io/
-     it is free, it allows 250 request / month
-     the API return a json text, transforming it into String[], then into a mysql table
+     the API return a json text, transforming it into String, then inserting into a mysql table
      */
     @FXML
     public void updateExchangeRates() {
@@ -293,6 +297,9 @@ public class MainController {
         }
     }
 
+    /**
+     * used to load currency's while the application is running
+     */
     @FXML
     void loadCurrency() {
         if (!loaded) {

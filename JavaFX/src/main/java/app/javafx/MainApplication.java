@@ -23,7 +23,9 @@ public class MainApplication extends Application {
         start(stage);
     }
 
-
+    /**
+     * loads the stage of the application depending on if the user is admin or not
+     */
     @Override
     public void start(Stage stage) {
         try {

@@ -18,6 +18,9 @@ public class LoginPage extends Application {
         start(stage);
     }
 
+    /**
+     * The main function that starts the program
+     */
     @Override
     public void start(Stage stage) throws IOException, ClassNotFoundException {
         FXMLLoader fxmlLoader = new FXMLLoader(LoginPage.class.getResource("login.fxml"));
