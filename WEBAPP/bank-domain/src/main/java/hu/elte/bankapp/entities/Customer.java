@@ -5,7 +5,7 @@ import java.time.LocalDate;
 
 
 /**
- * 
+ * .
  */
 @Entity
 public class Customer extends User {
