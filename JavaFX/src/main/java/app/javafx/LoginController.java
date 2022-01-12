@@ -10,6 +10,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import utils.Customer;
 
+/**
+ * Controller for LoginPage
+ */
 public class LoginController {
     @FXML
     Button btnSignin;

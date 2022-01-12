@@ -28,7 +28,9 @@ import utils.Currency;
 import utils.Customer;
 import utils.MailUtil;
 import utils.MyExceptions;
-
+/**
+ * Controller for MainApplication
+ */
 public class MainController {
 
     private Customer customer;

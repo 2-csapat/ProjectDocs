@@ -2,9 +2,12 @@ package utils;
 
 /**
  *
- * @author Simon Dominik Martin, Gazdag Áron, Boda Levente Miklós, Farkas Krisztián, Bazsó Benjámin
+ * @author Simon Dominik Martin, Gazdag Aron, Boda Levente Miklos, Farkas Krisztian, Bazso Benjamin
  */
 
+/**
+ * Custom type for Accounts
+ */
 public abstract class Account {
     private double balance = 0;
     private int accountNumber = -1;

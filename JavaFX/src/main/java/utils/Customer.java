@@ -1,5 +1,7 @@
 package utils;
-
+/**
+ * Custom type for Customer
+ */
 public class Customer {
     private final String id;
     private final String username;

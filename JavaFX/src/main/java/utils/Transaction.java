@@ -2,7 +2,9 @@ package utils;
 
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleStringProperty;
-
+/**
+ * Custom type for Transaction
+ */
 public class Transaction {
     private final SimpleStringProperty Sender;
     private final SimpleDoubleProperty Amount;

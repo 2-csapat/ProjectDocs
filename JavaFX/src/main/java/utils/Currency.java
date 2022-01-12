@@ -1,5 +1,7 @@
 package utils;
-
+/**
+ * Custom type for Currency
+ */
 public class Currency {
     private final String name;
     private final double value;

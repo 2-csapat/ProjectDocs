@@ -5,6 +5,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Base64;
 
+/**
+ * Encoding class
+ */
 public class SHA3_512 {
     private final String dataToHash;
     private final String salt;

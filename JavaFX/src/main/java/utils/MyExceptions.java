@@ -2,6 +2,9 @@ package utils;
 
 import javafx.scene.control.Alert;
 
+/**
+ * Exceptions for the running environment
+ */
 public class MyExceptions {
     public static class UsedUserName extends Exception {
 

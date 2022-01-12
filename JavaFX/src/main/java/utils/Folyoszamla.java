@@ -1,5 +1,7 @@
 package utils;
-
+/**
+ * Subclass of Account
+ */
 public class Folyoszamla extends Account {
     public Folyoszamla(int accountNumber, double deposit) {
         super(accountNumber);

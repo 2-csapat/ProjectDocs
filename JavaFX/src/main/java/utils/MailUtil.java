@@ -7,6 +7,9 @@ import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
 
+/**
+ * Our mail sender utility class
+ */
 public class MailUtil {
     /**
      *

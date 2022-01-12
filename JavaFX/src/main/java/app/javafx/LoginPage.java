@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * Loginpage for the user. This is the starting point of our application.
+ */
 public class LoginPage extends Application {
     public LoginPage() { }
 

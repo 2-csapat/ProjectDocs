@@ -8,7 +8,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import utils.Customer;
 
-
+/**
+ * This page opens when there were a successful login.
+ */
 public class MainApplication extends Application {
 
     private final Customer customer;
