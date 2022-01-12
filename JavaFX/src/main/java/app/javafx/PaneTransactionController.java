@@ -12,6 +12,9 @@ import utils.Currency;
 import utils.Customer;
 import utils.Transaction;
 
+/**
+ * Controller for PaneTransaction
+ */
 public class PaneTransactionController {
 
     private Customer customer;

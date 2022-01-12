@@ -8,6 +8,9 @@ import utils.Customer;
 import java.io.IOException;
 import java.util.ArrayList;
 
+/**
+ * Pane for transaction
+ */
 public class PaneTransaction extends AnchorPane {
     public PaneTransaction(Customer customer, ArrayList<Currency> currencys) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(PaneTransaction.class.getResource("transactionMenu.fxml"));

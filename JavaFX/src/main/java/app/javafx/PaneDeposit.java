@@ -6,6 +6,9 @@ import utils.Customer;
 
 import java.io.IOException;
 
+/**
+ * Pane for the deposit panel
+ */
 public class PaneDeposit extends AnchorPane {
     public PaneDeposit(Customer customer) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("depositMenu.fxml"));

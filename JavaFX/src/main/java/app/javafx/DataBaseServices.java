@@ -355,7 +355,11 @@ public class DataBaseServices {
         }
     }
 
-    // megnézi használt-e a felhasználó név
+    /**
+     * Checks whether username is already taken
+     * @param username
+     * @return is false it its used
+     */
     public boolean usedUsername(String username) {
         try {
             Connection connection = connect();
@@ -377,8 +381,11 @@ public class DataBaseServices {
         return true;
     }
 
-    // megnézi használt-e az email cím
-    // returns false if its used
+    /**
+     * Checks whether email address is already taken
+     * @param email
+     * @return is false if its used
+     */
     private boolean emailCheck(String email) {
         try {
             Connection connection = connect();

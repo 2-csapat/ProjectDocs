@@ -8,7 +8,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import utils.Transaction;
 
-
+/**
+ * Controller for PaneBankTransaction
+ */
 public class PaneBankTransactionController {
     @FXML
     TableView tableView;

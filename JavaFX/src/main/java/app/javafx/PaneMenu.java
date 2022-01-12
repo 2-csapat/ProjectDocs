@@ -5,6 +5,9 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 
+/**
+ * Pane for the menu
+ */
 public class PaneMenu extends AnchorPane {
 
     public PaneMenu(String firstname, String lastname, double balance, String cardNumber) throws IOException {

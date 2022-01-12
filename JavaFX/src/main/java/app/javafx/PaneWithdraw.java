@@ -6,6 +6,9 @@ import utils.Customer;
 
 import java.io.IOException;
 
+/**
+ * Pane for withdraw
+ */
 public class PaneWithdraw extends AnchorPane {
     public PaneWithdraw(Customer customer) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("withdrawMenu.fxml"));

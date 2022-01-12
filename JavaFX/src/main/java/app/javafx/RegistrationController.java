@@ -18,9 +18,16 @@ import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Controller for registration
+ */
 public class RegistrationController {
-
-    // felhasználónév ellenőrzés illetve hogy használt-e
+    /**
+     * Checks whether username is already taken
+     * @param username
+     * @return is false if its taken
+     * @throws Exception
+     */
     private boolean userNameCheck(String username) throws Exception {
         if (!username.matches("^\\S{4,20}")) {
             throw new MyExceptions.BadUserName();
@@ -28,7 +35,13 @@ public class RegistrationController {
         return true;
     }
 
-    // megnézi a jelszó erősségét
+    /**
+     * Checks password strength
+     * @param pw
+     * @param pw2
+     * @return is true if password is okey
+     * @throws Exception
+     */
     private boolean pwCheck(String pw, String pw2) throws Exception {
         // megnézi hogy a jelszó hosszabb-e mint 11 karakter
         if (pw.length() < 12) {
@@ -88,11 +101,15 @@ public class RegistrationController {
         if (hasWhiteSpace) {
             throw new MyExceptions.Space();
         }
-        // igazat ad vissza a jelszó megfelelő
+
         return true;
     }
 
-    // email valóságnak megfelelő-e (javax.mail)
+    /**
+     * Checks whether email is a proper address
+     * @param mail
+     * @return returns true if it is
+     */
     private boolean emailCheck(String mail) {
         boolean result = true;
         try {
@@ -109,7 +126,12 @@ public class RegistrationController {
         return result;
     }
 
-    // telefonszám ellenőrzése
+    /**
+     * Checks phone number
+     * @param phoneNum
+     * @return
+     * @throws Exception
+     */
     private boolean phoneNumCheck(String phoneNum) throws Exception {
         // regex jelölések: https://www.vogella.com/tutorials/JavaRegularExpressions/article.html
         // regex online tester: https://www.freeformatter.com/java-regex-tester.html
@@ -122,7 +144,13 @@ public class RegistrationController {
         }
     }
 
-    // név ellenőrzés
+    /**
+     * Checks name
+     * @param firstName
+     * @param lastName
+     * @return
+     * @throws Exception
+     */
     private boolean nameCheck(String firstName, String lastName) throws Exception {
         if (!firstName.matches("^[A-Z]\\D{1,20}")) {
             throw new MyExceptions.InvalidName();
@@ -133,7 +161,12 @@ public class RegistrationController {
         return true;
     }
 
-    // dátum ellenőrzése
+    /**
+     * Checks date
+     * @param date
+     * @return
+     * @throws Exception
+     */
     private boolean dateCheck(LocalDate date) throws Exception {
         if (date == null) throw new MyExceptions.InvalidDate();
         long epochdate = date.toEpochDay() * 86400000;
@@ -143,7 +176,12 @@ public class RegistrationController {
         return true;
     }
 
-    // kiválasztották-e a bankszámlatípust a regisztráció során
+    /**
+     * Checks which account type was chosen
+     * @param selectedItem
+     * @return
+     * @throws Exception
+     */
     public boolean choiceBoxCheck(Object selectedItem) throws Exception {
         if (selectedItem == null) throw new MyExceptions.NoChoice();
         return true;

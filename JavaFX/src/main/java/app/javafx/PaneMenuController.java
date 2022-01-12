@@ -18,6 +18,9 @@ import java.time.format.DateTimeFormatter;
 
 import org.controlsfx.control.Notifications;
 
+/**
+ * Controller for PaneMenu
+ */
 public class PaneMenuController {
 
     private String name;

@@ -176,14 +176,22 @@ public class MainController {
         }
     }
 
+    /**
+     * Opens the project webpage
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     @FXML
-    // opens the projects webpage
     public void openWebpage() throws URISyntaxException, IOException {
         java.awt.Desktop.getDesktop().browse(new URI("http://bazsobeni.web.elte.hu/WEB4/index.html"));
     }
 
+    /**
+     * Opens the projects GitHub
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     @FXML
-    // opens the projects GitHub
     public void openGitHub() throws URISyntaxException, IOException {
         java.awt.Desktop.getDesktop().browse(new URI("https://github.com/2-csapat/ProjectDocs"));
     }

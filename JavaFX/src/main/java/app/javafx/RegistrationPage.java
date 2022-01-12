@@ -8,7 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-
+/**
+ * Page for registration
+ */
 public class RegistrationPage extends Application {
 
     public RegistrationPage(MouseEvent event) throws Exception {
